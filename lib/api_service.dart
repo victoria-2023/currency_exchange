@@ -1,17 +1,17 @@
-// TODO Implement this library.
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-
+import 'package:http/http.dart' as http;
 
 class ApiService {
   final String baseUrl = 'https://www.freecurrencyapi.com/api/v1/rates';
 
+  String myVariable = "fca_live_lCd0VRhCXDdBtRSk1DTKEjPtjPjxaexcfDNAXBsb";
+
   Future<Map<String, dynamic>> getExchangeRate(String apiKey, String from, String to) async {
-    final Uri url = Uri.parse('$baseUrl?base_currency=$from&apikey=$apiKey');
+    final Uri url = Uri.parse('$baseUrl?base_currency=$from&to_currency=$to&apikey=$apiKey'); // Corrected URL
     print('API Request URL: $url');
 
     try {
-      var http;
       final response = await http.get(url);
 
       if (kDebugMode) {

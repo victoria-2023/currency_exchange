@@ -1,6 +1,7 @@
-// main.dart
 import 'package:flutter/material.dart';
 import 'api_service.dart';
+
+String myVariable = 'fca_live_lCd0VRhCXDdBtRSk1DTKEjPtjPjxaexcfDNAXBsb';
 
 void main() {
   runApp(MyApp());
@@ -34,10 +35,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _refresh() async {
     try {
-      final data = await apiService.getExchangeRate(fromCurrency, toCurrency);
+      final data = await apiService.getExchangeRate(myVariable, fromCurrency, toCurrency);
       setState(() {
         exchangeRate = data['data'][toCurrency];
-        // Call the _convert method with the current amount in the text field
         _convert();
       });
     } catch (e) {
@@ -46,19 +46,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _convert() {
-    // Convert the amount to double, default to 0.0 if parsing fails
     double amount = double.tryParse(amountController.text) ?? 0.0;
-    // Calculate the converted amount
+    print('Amount: $amount');
+    print('Exchange Rate: $exchangeRate');
+    double result = amount * exchangeRate;
+    print('Converted Amount: $result');
     setState(() {
-      convertedAmount = amount * exchangeRate;
+      convertedAmount = result;
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _refresh();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +125,6 @@ class _MyHomePageState extends State<MyHomePage> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Enter Amount'),
               onChanged: (value) {
-                // Call the _convert method whenever the amount changes
                 _convert();
               },
             ),
