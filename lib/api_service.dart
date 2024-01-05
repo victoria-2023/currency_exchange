@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  final String baseUrl = 'https://www.freecurrencyapi.com/api/v1/rates';
+  final String baseUrl = 'https://api.currencyapi.com/v3/latest?apikey=fca_live_lCd0VRhCXDdBtRSk1DTKEjPtjPjxaexcfDNAXBsb&currencies=EUR%2CUSD%2CCAD';
 
   String myVariable = "fca_live_lCd0VRhCXDdBtRSk1DTKEjPtjPjxaexcfDNAXBsb";
 
